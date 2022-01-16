@@ -78,3 +78,7 @@ prodigy db-out emersons_annotated >> emerson_annotated_text.jsonl
 
 This JSONL file is included here as well in the [`assets`](assets) subdirectory
 so the scripts can be run without having to (re)do this manual annotation.
+
+
+# Evaludate
+```/usr/local/opt/python@3.9/bin/python3.9 ./scripts/evaluate.py ./training/model-best/ corpus/dev.spacy```
