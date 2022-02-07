@@ -1,3 +1,5 @@
+import os
+os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
 from functools import partial
 from pathlib import Path
 from typing import Iterable, Callable

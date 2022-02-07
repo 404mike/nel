@@ -1,6 +1,7 @@
 import typer
 import csv
 import os
+import os.path
 from pathlib import Path
 
 import spacy
@@ -36,7 +37,8 @@ def main(entities_loc: Path, vectors_model: str, kb_loc: Path, nlp_dir: Path):
     qids = name_dict.keys()
 
     # save qids to pickle file
-    with open("./pickle/qids.pkl", 'wb') as f:
+    path = os.path.join("pickle", "qids.pkl")
+    with open(path, 'wb') as f:
         pickle.dump(name_dict, f)
 
     probs = [0.3 for qid in qids]

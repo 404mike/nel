@@ -1,13 +1,13 @@
 setup:
   cmd: python -m spacy run setup
   script:
-    - python -m pip install -r requirements.txt
+    - python -m pip install -r requirements.txt --proxy=cache.llgc.org.uk:80
   deps:
     - path: requirements.txt
-      md5: e5865d4b3b5bc44c9d22ecacfeea82d7
+      md5: c5e0defed7a620a7fe95db6341056b55
   outs: []
-  spacy_version: 3.1.2
-  spacy_git_version: e1f88de72
+  spacy_version: 3.1.3
+  spacy_git_version: 8bda39f08
 download:
   cmd: python -m spacy run download
   script:
@@ -26,13 +26,13 @@ kb:
       md5: d862a947632ffe310d513868ad0ddba5
   outs:
     - path: temp/my_kb
-      md5: 8961bd6318f9f62abf2b8fd92f6b75be
+      md5: d3c9303a3d8e2f2863d1b86689d53572
     - path: temp/my_nlp
-      md5: 074f9c6e2e8bdc48e5b642a2b9419fa4
+      md5: 44150c504b63a6ec838c3ad5f67ec3a9
     - path: scripts/create_kb.py
-      md5: 9b962abf1e94e4837fd35668c23add25
-  spacy_version: 3.1.2
-  spacy_git_version: e1f88de72
+      md5: f67f5dee31a84a09bde8bfe902364490
+  spacy_version: 3.1.3
+  spacy_git_version: 8bda39f08
 corpus:
   cmd: python -m spacy run corpus
   script:
@@ -43,11 +43,11 @@ corpus:
       md5: ba3898b9ff6fbebe8bb98bcdece504df
   outs:
     - path: corpus/train.spacy
-      md5: d499891cb7d3d81bd57155f56280fa16
+      md5: d9f846800eaf9f7133aaeb377898bc93
     - path: corpus/dev.spacy
-      md5: 3fe0f68abd7f947625ca9b7a0497611d
-  spacy_version: 3.1.2
-  spacy_git_version: e1f88de72
+      md5: 1ef0259f97ce0909200a29a63427c14c
+  spacy_version: 3.1.3
+  spacy_git_version: 8bda39f08
 train:
   cmd: python -m spacy run train
   script:
@@ -56,25 +56,25 @@ train:
       -c scripts/custom_functions.py
   deps:
     - path: temp/my_kb
-      md5: 8961bd6318f9f62abf2b8fd92f6b75be
+      md5: d3c9303a3d8e2f2863d1b86689d53572
     - path: temp/my_nlp
-      md5: 074f9c6e2e8bdc48e5b642a2b9419fa4
+      md5: e5e8698f37869d997b88789cfbcf1a3b
     - path: corpus/train.spacy
-      md5: d499891cb7d3d81bd57155f56280fa16
+      md5: d9f846800eaf9f7133aaeb377898bc93
     - path: corpus/dev.spacy
-      md5: 3fe0f68abd7f947625ca9b7a0497611d
+      md5: 1ef0259f97ce0909200a29a63427c14c
   outs: []
-  spacy_version: 3.1.2
-  spacy_git_version: e1f88de72
+  spacy_version: 3.1.3
+  spacy_git_version: 8bda39f08
 evaluate:
   cmd: python -m spacy run evaluate
   script:
     - python ./scripts/evaluate.py ./training/model-best/ corpus/dev.spacy
   deps:
     - path: training/model-best
-      md5: 8ed964c5656b1be75a4087f90c3c3617
+      md5: a438724f82b4efd054b7ef4e1a0b71c8
     - path: corpus/dev.spacy
-      md5: 3fe0f68abd7f947625ca9b7a0497611d
+      md5: 1ef0259f97ce0909200a29a63427c14c
   outs: []
-  spacy_version: 3.1.2
-  spacy_git_version: e1f88de72
+  spacy_version: 3.1.3
+  spacy_git_version: 8bda39f08

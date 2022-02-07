@@ -37,7 +37,7 @@ assets:
 workflows:
   all:
     - setup
-    - download
+    # - download
     - kb
     - corpus
     - train
@@ -103,7 +103,7 @@ commands:
   - name: setup
     help: Install dependencies
     script:
-      - "python -m pip install -r requirements.txt"
+      - "python -m pip install -r requirements.txt --proxy=cache.llgc.org.uk:80"
     deps:
       - "requirements.txt"
 
