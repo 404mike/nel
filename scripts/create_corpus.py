@@ -1,3 +1,4 @@
+from cgi import print_environ
 import sys
 import typer
 import json
@@ -62,26 +63,31 @@ def main(json_loc: Path, nlp_dir: Path, train_corpus: Path, test_corpus: Path):
 
         if len(indices) > 1:
             # split indicies
-            # train, validate, test = np.split(indices, [int(len(indices)*0.6), int(len(indices)*1)])
-            train, test = np.split(indices, [int(len(indices)*0.6)])
+            train, validate, test = np.split(indices, [int(len(indices)*0.8), int(len(indices)*1)])
+            # train, test = np.split(indices, [int(len(indices)*0.6), int(len(indices)*1)])
+            # print("test ")
+            # print(train)
+            # print(test)
+            # print(validate)
+            # print("")
             
             # merge test and validate
-            # test_data_arr = np.concatenate((test, validate))
+            test_data_arr = np.concatenate((test, validate))
 
             # loop through all train arr and add to train docs
             for index in train:
                 train_docs.add(docs[index])
 
             # loop through all test arr and add to test docs
-            for index in test:
+            for index in test_data_arr:
                 test_docs.add(docs[index])
 
         if len(indices) == 1:
             for index in indices:
                 train_docs.add(docs[index])
 
-    random.shuffle(train_docs)
-    random.shuffle(test_docs)
+    # random.shuffle(train_docs)
+    # random.shuffle(test_docs)
 
     print(len(train_docs))
     print(len(test_docs))
