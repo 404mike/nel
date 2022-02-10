@@ -11,14 +11,13 @@ import random
 import numpy as np
 from spacy.tokens import DocBin, Span
 import pickle
-import numpy as np
 
 def main(json_loc: Path, nlp_dir: Path, train_corpus: Path, test_corpus: Path):
     """ Step 2: Once we have done the manual annotations with Prodigy, create corpora in spaCy format. """
 
     path = os.path.join("pickle", "qids.pkl")
     name_dict = pickle.load(open(path, "rb"))
-    qids = list(name_dict.keys())
+    qids = name_dict.keys()
 
     nlp = spacy.load(nlp_dir, exclude="parser, tagger")
     docs = []
@@ -59,30 +58,11 @@ def main(json_loc: Path, nlp_dir: Path, train_corpus: Path, test_corpus: Path):
                 except:
                     pass
 
-    # print("Statistics of manually annotated data:")
-    # print(Counter(gold_ids))
-    # print()
+    print("Statistics of manually annotated data:")
+    print(Counter(gold_ids))
+    print()
 
-    qids_split = np.array_split(qids,100)
-    
-    qids_loop = 0
-    for qid_split in qids_split:
-        # print("LEn")
-        # print(len(qid_split))
-        # print(qid_split)
-        # print()
-        format_data(qid_split,gold_ids,docs,qids_loop)
-        qids_loop+=1
-    # format_data(qids,gold_ids,docs)
-
-    # print("spacy files written")
-    # print("Data output")
-    # print(train_docs)
-    sys.exit()
-
-
-def format_data(qids,gold_ids,docs,qids_loop):
-        # print(dataset[0])
+    # print(dataset[0])
     train_docs = DocBin()
     test_docs = DocBin()
     temp = []
@@ -130,10 +110,13 @@ def format_data(qids,gold_ids,docs,qids_loop):
     print(len(train_docs))
     print(len(test_docs))
 
-    train_docs.to_disk(f"corpus/train/train_{qids_loop}.spacy")
-    test_docs.to_disk(f"corpus/dev/dev_{qids_loop}.spacy")
+    train_docs.to_disk(train_corpus)
+    test_docs.to_disk(test_corpus)
 
-    print(f"spacy file {qids_loop} written")
+    print("Data output")
+    print(train_docs)
+    sys.exit()
+
 
 if __name__ == "__main__":
     typer.run(main)

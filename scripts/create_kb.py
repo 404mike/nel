@@ -45,9 +45,9 @@ def main(entities_loc: Path, vectors_model: str, kb_loc: Path, nlp_dir: Path):
     # ensure that sum([probs]) <= 1 when setting aliases
     # kb.add_alias(alias="Emerson", entities=qids, probabilities=probs)  #
 
-    print(f"Entities in the KB: {kb.get_entity_strings()}")
-    print(f"Aliases in the KB: {kb.get_alias_strings()}")
-    print()
+    # print(f"Entities in the KB: {kb.get_entity_strings()}")
+    # print(f"Aliases in the KB: {kb.get_alias_strings()}")
+    # print()
     kb.to_disk(kb_loc)
     if not os.path.exists(nlp_dir):
         os.mkdir(nlp_dir)
