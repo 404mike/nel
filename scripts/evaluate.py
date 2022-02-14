@@ -1,3 +1,4 @@
+import os
 import typer
 from pathlib import Path
 
@@ -17,11 +18,32 @@ def main(nlp_dir: Path, dev_set: Path):
     """ Step 4: Evaluate the new Entity Linking component by applying it to unseen text. """
     nlp = spacy.util.load_model_from_path(nlp_dir)
     examples = []
-    with open(dev_set, "rb") as f:
-        doc_bin = DocBin().from_disk(dev_set)
-        docs = doc_bin.get_docs(nlp.vocab)
-        for doc in docs:
-            examples.append(Example(nlp(doc.text), doc))
+
+    filepath = os.path.join('corpus','dev')
+    diretory = os.fsencode(filepath)
+
+    doc_bin = DocBin()
+    # print("docbin len")
+    # print(len(doc_bin))
+
+    for files in os.listdir(diretory):
+        filename = os.fsdecode(files)
+        # print(f"file: {filename}")
+        doc_bin_loop = DocBin().from_disk(str(filepath) + '\\' + filename)
+        doc_bin.merge(doc_bin_loop)
+        # print(len(doc_bin))
+
+
+    docs = doc_bin.get_docs(nlp.vocab)
+    for doc in docs:
+        examples.append(Example(nlp(doc.text), doc))
+
+
+    # with open(dev_set, "rb") as f:
+        # doc_bin = DocBin().from_disk(dev_set)
+        # docs = doc_bin.get_docs(nlp.vocab)
+        # for doc in docs:
+        #     examples.append(Example(nlp(doc.text), doc))
 
     print()
     print("RESULTS ON THE DEV SET:")
