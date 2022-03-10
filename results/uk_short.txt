@@ -1,0 +1,39 @@
+[2022-02-19 18:51:52,096] [INFO] Finished initializing nlp object
+[2022-02-19 18:53:17,621] [INFO] Initialized pipeline components: ['entity_linker']
+✔ Initialized pipeline
+
+============================= Training pipeline =============================
+ℹ Pipeline: ['sentencizer', 'entity_ruler', 'ner', 'entity_linker']
+ℹ Frozen components: ['sentencizer', 'ner']
+ℹ Initial learn rate: 0.001
+E    #       LOSS ENTIT...  SENTS_F  SENTS_P  SENTS_R  ENTS_F  ENTS_P  ENTS_R  NEL_MICRO_F  NEL_MICRO_R  NEL_MICRO_P  SCORE
+---  ------  -------------  -------  -------  -------  ------  ------  ------  -----------  -----------  -----------  ------
+  0       0           1.05     8.00     4.81    23.71    0.00    0.00    0.00        85.77        85.77        85.77    0.31
+  0     200          96.56     8.00     4.81    23.71    0.00    0.00    0.00        85.77        85.77        85.77    0.31
+  0     400          85.72     8.00     4.81    23.71    0.00    0.00    0.00        85.77        85.77        85.77    0.31
+  0     600          88.06     8.00     4.81    23.71    0.00    0.00    0.00        85.77        85.77        85.77    0.31
+  0     800          90.17     8.00     4.81    23.71    0.00    0.00    0.00        85.77        85.77        85.77    0.31
+  0    1000          92.57     8.00     4.81    23.71    0.00    0.00    0.00        85.77        85.77        85.77    0.31
+  0    1200          95.95     8.00     4.81    23.71    0.00    0.00    0.00        85.77        85.77        85.77    0.31
+  0    1400         104.09     8.00     4.81    23.71    0.00    0.00    0.00        85.77        85.77        85.77    0.31
+  0    1600         105.74     8.00     4.81    23.71    0.00    0.00    0.00        85.77        85.77        85.77    0.31
+  0    1800         106.06     8.00     4.81    23.71    0.00    0.00    0.00        85.77        85.77        85.77    0.31
+  0    2000         128.54     8.00     4.81    23.71    0.00    0.00    0.00        85.77        85.77        85.77    0.31
+✔ Saved pipeline to output directory
+training\model-last
+
+================================== evaluate ==================================
+Running command: 'c:\users\mij\anaconda3\python.exe' ./scripts/evaluate.py ./training/model-best/ corpus/dev
+Time now  2022-02-21 22:58:08.740737
+
+RESULTS ON THE DEV SET:
+Number of items: 77626
+
+RUNNING THE PIPELINE ON UNSEEN TEXT:
+Kyffin Williams was a painter.
+Kyffin Williams PERSON Q6450928
+
+Right: 58259
+Wrong: 0
+Passed: 0
+Average of 75.05088501275345%

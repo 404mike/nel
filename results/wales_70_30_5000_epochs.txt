@@ -1,0 +1,145 @@
+Running command: 'c:\users\mij\anaconda3\python.exe' ./scripts/create_corpus.py ./assets/wales.jsonl ./temp/my_nlp/ corpus/train.spacy corpus/dev.spacy
+1581
+817
+Traceback (most recent call last):
+  File "./scripts/create_corpus.py", line 139, in <module>
+    typer.run(main)
+  File "c:\users\mij\anaconda3\lib\site-packages\typer\main.py", line 864, in run
+    app()
+  File "c:\users\mij\anaconda3\lib\site-packages\typer\main.py", line 214, in __call__
+    return get_command(self)(*args, **kwargs)
+  File "c:\users\mij\anaconda3\lib\site-packages\click\core.py", line 829, in __call__
+    return self.main(*args, **kwargs)
+  File "c:\users\mij\anaconda3\lib\site-packages\click\core.py", line 782, in main
+    rv = self.invoke(ctx)
+  File "c:\users\mij\anaconda3\lib\site-packages\click\core.py", line 1066, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+  File "c:\users\mij\anaconda3\lib\site-packages\click\core.py", line 610, in invoke
+    return callback(*args, **kwargs)
+  File "c:\users\mij\anaconda3\lib\site-packages\typer\main.py", line 500, in wrapper
+    return callback(**use_params)  # type: ignore
+  File "./scripts/create_corpus.py", line 74, in main
+    format_data(qid_split,gold_ids,docs,qids_loop)
+  File "./scripts/create_corpus.py", line 133, in format_data
+    train_docs.to_disk(f"corpus/train/train_{qids_loop}.spacy")
+  File "c:\users\mij\anaconda3\lib\site-packages\spacy\tokens\_serialize.py", line 248, in to_disk
+    with path.open("wb") as file_:
+  File "c:\users\mij\anaconda3\lib\pathlib.py", line 1221, in open
+    return io.open(self, mode, buffering, encoding, errors, newline,
+  File "c:\users\mij\anaconda3\lib\pathlib.py", line 1077, in _opener
+    return self._accessor.open(self, flags, mode)
+FileNotFoundError: [Errno 2] No such file or directory: 'corpus\\train\\train_0.spacy'
+
+(base) C:\Users\mij\uni\nel>
+(base) C:\Users\mij\uni\nel>
+(base) C:\Users\mij\uni\nel>spacy project run training
+ℹ Running workflow 'training'
+
+===================================== kb =====================================
+ℹ Skipping 'kb': nothing changed
+
+=================================== corpus ===================================
+Running command: 'c:\users\mij\anaconda3\python.exe' ./scripts/create_corpus.py ./assets/wales.jsonl ./temp/my_nlp/ corpus/train.spacy corpus/dev.spacy
+1581
+817
+spacy file 0 written
+1293
+699
+spacy file 1 written
+816
+440
+spacy file 2 written
+1940
+1003
+spacy file 3 written
+2758
+1361
+spacy file 4 written
+2128
+1138
+spacy file 5 written
+2138
+1105
+spacy file 6 written
+2038
+1090
+spacy file 7 written
+2118
+1095
+spacy file 8 written
+1219
+634
+spacy file 9 written
+
+=================================== train ===================================
+Running command: 'c:\users\mij\anaconda3\python.exe' -m spacy train configs/nel.cfg --output training --paths.train corpus/train/ --paths.dev corpus/dev/ --paths.kb temp/my_kb --paths.base_nlp temp/my_nlp -c scripts/custom_functions.py
+ℹ Saving to output directory: training
+ℹ Using CPU
+
+=========================== Initializing pipeline ===========================
+[2022-02-17 10:15:41,154] [INFO] Set up nlp object from config
+[2022-02-17 10:15:41,162] [INFO] Pipeline: ['sentencizer', 'entity_ruler', 'ner', 'entity_linker']
+[2022-02-17 10:15:41,162] [INFO] Resuming training for: ['entity_ruler']
+[2022-02-17 10:15:41,167] [INFO] Created vocabulary
+[2022-02-17 10:15:42,911] [INFO] Added vectors: temp/my_nlp
+[2022-02-17 10:15:44,959] [INFO] Finished initializing nlp object
+[2022-02-17 10:15:55,542] [INFO] Initialized pipeline components: ['entity_linker']
+✔ Initialized pipeline
+
+============================= Training pipeline =============================
+ℹ Pipeline: ['sentencizer', 'entity_ruler', 'ner', 'entity_linker']
+ℹ Frozen components: ['sentencizer', 'ner']
+ℹ Initial learn rate: 0.001
+E    #       LOSS ENTIT...  SENTS_F  SENTS_P  SENTS_R  ENTS_F  ENTS_P  ENTS_R  NEL_MICRO_F  NEL_MICRO_R  NEL_MICRO_P  SCORE
+---  ------  -------------  -------  -------  -------  ------  ------  ------  -----------  -----------  -----------  ------
+  0       0           1.00    23.92    16.31    44.88    0.00    0.00    0.00        93.58        93.58        93.58    0.39
+  0     200         109.24    23.92    16.31    44.88    0.00    0.00    0.00        93.58        93.58        93.58    0.39
+  0     400          97.57    23.92    16.31    44.88    0.00    0.00    0.00        93.58        93.58        93.58    0.39
+  0     600         107.87    23.92    16.31    44.88    0.00    0.00    0.00        93.58        93.58        93.58    0.39
+  0     800         105.81    23.92    16.31    44.88    0.00    0.00    0.00        93.58        93.58        93.58    0.39
+  0    1000         114.02    23.92    16.31    44.88    0.00    0.00    0.00        93.58        93.58        93.58    0.39
+  0    1200         118.35    23.92    16.31    44.88    0.00    0.00    0.00        93.58        93.58        93.58    0.39
+  0    1400         123.17    23.92    16.31    44.88    0.00    0.00    0.00        93.58        93.58        93.58    0.39
+  0    1600         128.86    23.92    16.31    44.88    0.00    0.00    0.00        93.58        93.58        93.58    0.39
+  0    1800         128.98    23.92    16.31    44.88    0.00    0.00    0.00        93.58        93.58        93.58    0.39
+  0    2000         125.58    23.92    16.31    44.88    0.00    0.00    0.00        93.58        93.58        93.58    0.39
+  0    2200         132.08    23.92    16.31    44.88    0.00    0.00    0.00        93.58        93.58        93.58    0.39
+  0    2400         123.18    23.92    16.31    44.88    0.00    0.00    0.00        93.58        93.58        93.58    0.39
+  0    2600         117.94    23.92    16.31    44.88    0.00    0.00    0.00        93.58        93.58        93.58    0.39
+  0    2800         119.36    23.92    16.31    44.88    0.00    0.00    0.00        93.58        93.58        93.58    0.39
+  1    3000         113.81    23.92    16.31    44.88    0.00    0.00    0.00        93.58        93.58        93.58    0.39
+  1    3200         111.04    23.92    16.31    44.88    0.00    0.00    0.00        93.58        93.58        93.58    0.39
+  1    3400         109.63    23.92    16.31    44.88    0.00    0.00    0.00        93.58        93.58        93.58    0.39
+  1    3600         108.74    23.92    16.31    44.88    0.00    0.00    0.00        93.58        93.58        93.58    0.39
+  1    3800         109.32    23.92    16.31    44.88    0.00    0.00    0.00        93.58        93.58        93.58    0.39
+  1    4000         103.92    23.92    16.31    44.88    0.00    0.00    0.00        93.58        93.58        93.58    0.39
+  1    4200         103.92    23.92    16.31    44.88    0.00    0.00    0.00        93.58        93.58        93.58    0.39
+  2    4400         102.31    23.92    16.31    44.88    0.00    0.00    0.00        93.58        93.58        93.58    0.39
+  2    4600          99.24    23.92    16.31    44.88    0.00    0.00    0.00        93.58        93.58        93.58    0.39
+  2    4800          98.62    23.92    16.31    44.88    0.00    0.00    0.00        93.58        93.58        93.58    0.39
+  2    5000          98.34    23.92    16.31    44.88    0.00    0.00    0.00        93.58        93.58        93.58    0.39
+✔ Saved pipeline to output directory
+training\model-last
+
+✘ Missing dependency specified by command 'evaluate': corpus/dev.spacy
+Maybe you forgot to run the 'project assets' command or a previous step?
+
+
+(base) C:\Users\mij\uni\nel>spacy project run onlyevaluate
+ℹ Running workflow 'onlyevaluate'
+
+================================== evaluate ==================================
+Running command: 'c:\users\mij\anaconda3\python.exe' ./scripts/evaluate.py ./training/model-best/ corpus/dev
+Time now  2022-02-17 12:07:57.923573
+
+RESULTS ON THE DEV SET:
+Number of items: 9382
+
+RUNNING THE PIPELINE ON UNSEEN TEXT:
+Kyffin Williams was a painter.
+Kyffin Williams PERSON Q6450928
+
+Right: 7546
+Wrong: 0
+Passed: 0
+Average of 80.43061180984866%
