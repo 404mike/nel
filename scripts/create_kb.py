@@ -30,9 +30,28 @@ def main(entities_loc: Path, vectors_model: str, kb_loc: Path, nlp_dir: Path):
         # Set arbitrary value for frequency
         kb.add_entity(entity=qid, entity_vector=desc_enc, freq=342)
 
+    # store duplicate names
+    names_merged = {}
+
+    # loop through names and add qid to list
     for qid, name in name_dict.items():
-        # set 100% prior probability P(entity|alias) for each unique name
-        kb.add_alias(alias=name, entities=[qid], probabilities=[1])
+        if name in names_merged:
+            names_merged[name].append(qid)
+        else:
+            names_merged[name] = [qid]
+
+    # loop through each of the names and create alias for each
+    for key, val in names_merged.items():
+        name = key
+        # get number of qids for this name
+        qid_len = len(val)
+        # get probabilty for each person
+        prob_val = round((1/qid_len),2)
+        # format probabilty
+        probs = [prob_val for v in val]
+
+        # add person data to alias
+        kb.add_alias(alias=name, entities=val, probabilities=probs)
 
     qids = name_dict.keys()
 
