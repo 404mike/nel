@@ -46,10 +46,14 @@ def main(entities_loc: Path, vectors_model: str, kb_loc: Path, nlp_dir: Path):
         # get number of qids for this name
         qid_len = len(val)
         # get probabilty for each person
-        prob_val = round((1/qid_len),2)
+        prob_val = (1/qid_len)
+        
         # format probabilty
-        probs = [prob_val for v in val]
-
+        if qid_len > 1:
+            probs = [prob_val for v in val]
+        else:
+            probs = [1]
+        
         # add person data to alias
         kb.add_alias(alias=name, entities=val, probabilities=probs)
 

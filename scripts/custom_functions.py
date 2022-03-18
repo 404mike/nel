@@ -1,3 +1,4 @@
+from distutils.log import warn
 import os
 os.environ['KMP_DUPLICATE_LIB_OK'] = 'True'
 from functools import partial
@@ -7,6 +8,8 @@ import spacy
 from spacy.training import Example
 from spacy.tokens import DocBin
 
+import warnings
+warnings.filterwarnings("ignore")
 
 @spacy.registry.readers("MyCorpus.v1")
 def create_docbin_reader(file: Path) -> Callable[["Language"], Iterable[Example]]:

@@ -63,7 +63,7 @@ def main(json_loc: Path, nlp_dir: Path, train_corpus: Path, test_corpus: Path):
     # print(Counter(gold_ids))
     # print()
 
-    qids_split = np.array_split(qids,100)
+    qids_split = np.array_split(qids,10)
     
     qids_loop = 0
     for qid_split in qids_split:
@@ -92,7 +92,7 @@ def format_data(qids,gold_ids,docs,qids_loop):
 
         if len(indices) > 1:
             # split indicies
-            train, validate, test = np.split(indices, [int(len(indices)*0.8), int(len(indices)*1)])
+            train, validate, test = np.split(indices, [int(len(indices)*0.7), int(len(indices)*1)])
             # train, test = np.split(indices, [int(len(indices)*0.6), int(len(indices)*1)])
             # print("test ")
             # print(train)

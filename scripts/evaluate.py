@@ -9,9 +9,14 @@ from spacy.training import Example
 
 # we need to import this to parse the custom reader from the config
 from custom_functions import create_docbin_reader
+from datetime import datetime
 
 
 def main(nlp_dir: Path, dev_set: Path):
+
+    now = datetime.now()
+    print("Time now ", now)
+
     r = 0
     w = 0
     p = 0
@@ -64,6 +69,9 @@ def main(nlp_dir: Path, dev_set: Path):
     text = "Kyffin Williams was a painter."
     doc = nlp(text)
     print(text)
+
+    print()
+    text2 = "Winston Churchill was a prime minister along with David Lloyd George"
     for ent in doc.ents:
         print(ent.text, ent.label_, ent.kb_id_)
     print()
